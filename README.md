@@ -1,1 +1,1 @@
-Just drop dist/AutoSquelch.dll into your Hearthstone Mods folder (you need to have installed MelonLoader first)
+Just drop [the latest DLL](https://github.com/sebastientromp/hs-melon-auto-squelch/releases/latest/download/AutoSquelch.dll) into your Hearthstone Mods folder (you need to have installed MelonLoader first)
