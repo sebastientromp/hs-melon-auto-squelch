@@ -14,20 +14,15 @@ namespace AutoSquelch
         {
             AutoSquelchMod.SharedLogger = LoggerInstance;
             var harmony = this.HarmonyInstance;
-            MethodInfo isSquelchedMethod = typeof(EnemyEmoteHandler).GetMethod("IsSquelched", new Type[] { typeof(int) });
-            MethodInfo squelchPrefix = AccessTools.Method(typeof(SquelchPatcher), "Prefix");
-            harmony.Patch(isSquelchedMethod, new HarmonyMethod(squelchPrefix));
+            harmony.PatchAll(typeof(SquelchPatcher));
 
-        }
-
-        public override void OnSceneWasLoaded(int buildIndex, string sceneName)
-        {
-            LoggerInstance.Msg($"Scene {sceneName} with build index {buildIndex} has been loaded!");
         }
     }
 
     public static class SquelchPatcher
     {
+        [HarmonyPatch(typeof(EnemyEmoteHandler), "IsSquelched", new Type[] { typeof(int) })]
+        [HarmonyPrefix]
         public static bool Prefix(ref bool __result)
         {
             AutoSquelchMod.SharedLogger.Msg($"Patching IsSquelched: {__result}");
